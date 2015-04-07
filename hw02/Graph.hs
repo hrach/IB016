@@ -140,7 +140,7 @@ edgeCount (Graph _ es) = M.size es
 -- >>> totalWeight testGraph
 -- 166
 totalWeight :: Graph -> Integer
-totalWeight (Graph _ es) = sum $ M.toList es
+totalWeight (Graph _ es) = sum $ M.elems es
 
 -- | Average value of edges, if no edges are present 'Nothing' is returned.
 -- Bonus: calculate average in one pass
@@ -151,7 +151,7 @@ averageWeight :: Fractional a => Graph -> Maybe a
 averageWeight (Graph _ es) = if not $ M.null es
                              then Just ((fromIntegral $ sum edges) / (fromIntegral $ length edges))
                              else Nothing
-                             where edges = M.toList es
+                             where edges = M.elems es
 
 -- | Median value of edges, if no edges are present 'Nothing' is returned.
 -- In case of even number of edges, use integer division to obtain median.
@@ -165,7 +165,7 @@ medianWeight (Graph _ es) = if M.null es
                                 if odd count
                                 then Just (edges !! (count `div` 2))
                                 else Just (edges !! (count `div` 2) - 1)
-                            where edges = sort $ M.toList es
+                            where edges = sort $ M.elems es
                                   count = length edges
 
 {- | Find shortest path from one vertex to another. If there is no such path,
